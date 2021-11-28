@@ -11,8 +11,6 @@
 /Users/imran/Projects/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.pdb
 /Users/imran/Projects/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.genruntimeconfig.cache
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/bin/Debug/netcoreapp3.1/QueueManagementSystem.deps.json
-/Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/bin/Debug/netcoreapp3.1/QueueManagementSystem.runtimeconfig.json
-/Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/bin/Debug/netcoreapp3.1/QueueManagementSystem.runtimeconfig.dev.json
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/bin/Debug/netcoreapp3.1/QueueManagementSystem.dll
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/bin/Debug/netcoreapp3.1/QueueManagementSystem.pdb
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.csproj.AssemblyReference.cache
@@ -21,4 +19,3 @@
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.csproj.CoreCompileInputs.cache
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.dll
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.pdb
-/Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.genruntimeconfig.cache

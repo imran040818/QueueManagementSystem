@@ -1,20 +1,22 @@
-﻿<Properties StartupConfiguration="{E9F8A1CD-3B8D-4E0C-9AFB-C18E5852CF63}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="QueueManagementSystem/Program.cs">
+﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{C2ED9F68-3125-4192-978A-63FFDB5274E4}|Default">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="QueueManagementSystem/Program.cs" Line="23" Column="14" />
+      <File FileName="QueueManagementSystem.Test/Program.cs" Line="1" Column="1" />
+      <File FileName="QueueManagementSystem.Demo/Program.cs" Line="8" Column="37" />
+      <File FileName="QueueManagementSystem.Demo/Models/BackupTaskInformationParameter.cs" Line="10" Column="1" />
+      <File FileName="QueueManagementSystem/QueueManagementSystem.csproj" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="QueueManagementSystem" expanded="True">
-            <Node name="QueueManagementSystem" expanded="True">
-              <Node name="Program.cs" selected="True" />
-            </Node>
+          <Node name="QueueManagementSystem" expanded="True" selected="True">
+            <Node name="QueueManagementSystem.Test" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.QueueManagementSystem.Test FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.QueueManagementSystem PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -22,4 +24,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.QueueManagementSystem.Demo PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
