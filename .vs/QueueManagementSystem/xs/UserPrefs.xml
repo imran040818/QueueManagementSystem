@@ -1,22 +1,21 @@
 ﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{C2ED9F68-3125-4192-978A-63FFDB5274E4}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument=".gitignore">
     <Files>
       <File FileName="QueueManagementSystem.Test/Program.cs" Line="1" Column="1" />
       <File FileName="QueueManagementSystem.Demo/Program.cs" Line="8" Column="37" />
       <File FileName="QueueManagementSystem.Demo/Models/BackupTaskInformationParameter.cs" Line="10" Column="1" />
       <File FileName="QueueManagementSystem/QueueManagementSystem.csproj" Line="1" Column="1" />
+      <File FileName=".gitignore" Line="76" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="QueueManagementSystem" expanded="True" selected="True">
-            <Node name="QueueManagementSystem.Test" expanded="True" />
-          </Node>
+          <Node name="QueueManagementSystem" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.QueueManagementSystem.Test FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.QueueManagementSystem.Test PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.QueueManagementSystem PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
