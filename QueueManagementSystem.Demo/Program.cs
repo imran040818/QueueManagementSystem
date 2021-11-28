@@ -3,6 +3,7 @@ using QueueManagementSystem.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using QueueManagementSystem.Demo.Models;
 
 namespace QueueManagementSystem
 {
