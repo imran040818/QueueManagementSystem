@@ -1,9 +1,11 @@
-﻿using QueueManagementSystem.Core;
-using QueueManagementSystem.Models;
+﻿
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using QueueManagementSystem.Demo.Models;
+using QueueManagementSystem.Core;
+using QueueManagementSystem.Demo;
+using QueueManagementSystem.Models;
 
 namespace QueueManagementSystem
 {
@@ -12,19 +14,19 @@ namespace QueueManagementSystem
         static void Main(string[] args)
         {
             var queueService = new QueueService<BackupTaskInformationParameter, int>();
-            queueService.ReadyToAcceptTaskEventHandler += QueueService_ReadyToAcceptTaskEventHandler;
-            queueService.TaskAllCancelEventHandler += QueueService_TaskAllCancelEventHandler;
-            queueService.TaskCompleteEventHandler += QueueService_TaskCompleteEventHandler;
-            queueService.TaskFaultedEventHandler += QueueService_TaskFaultedEventHandler;
-            queueService.TaskCancelledEventHandler += QueueService_TaskCancelledEventHandler;
-            queueService.TaskAllPausedEventHandler += QueueService_TaskAllPausedEventHandler;
-            queueService.TaskPausedEventHandler += QueueService_TaskPausedEventHandler;
+            queueService.ReadyToEnqueue += QueueService_ReadyToAcceptTaskEventHandler;
+            queueService.TaskAllCancel += QueueService_TaskAllCancelEventHandler;
+            queueService.TaskComplete += QueueService_TaskCompleteEventHandler;
+            queueService.TaskFaulted += QueueService_TaskFaultedEventHandler;
+            queueService.TaskCancelled += QueueService_TaskCancelledEventHandler;
+            queueService.TaskAllPausedEvent += QueueService_TaskAllPausedEventHandler;
+            queueService.TaskPausedEvent += QueueService_TaskPausedEventHandler;
 
             queueService.Configure(new QueueInformation
             {
                 PreferedParallelizationFactor = 4
             });
-            queueService.Start();
+            queueService.StartQueue();
             queueService.Enqueue(new TaskInformation<BackupTaskInformationParameter, int>
             {
                 TaskId = 1,

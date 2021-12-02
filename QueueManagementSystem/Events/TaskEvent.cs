@@ -1,10 +1,10 @@
 ﻿namespace QueueManagementSystem.Events
 {
-    public delegate void TaskCancelledHandler<T>(T data);
-    public delegate void TaskAllCancelledHandler<T>(T data);
-    public delegate void TaskPausedHandler<T>(T data);
-    public delegate void TaskAllPausedHandler<T>(T data);
-    public delegate void TaskCompleteHandler<T>(T data);
-    public delegate void TaskFaultedHandler<T>(T data);
-    public delegate void ReadyToAcceptTaskHandler();
+    public delegate void TaskCancelledEventHandler<T>(T data);
+    public delegate void TaskAllCancelledEventHandler<T>(T data);
+    public delegate void TaskPausedEventHandler<T>(T data);
+    public delegate void TaskAllPausedEventHandler<T>(T data);
+    public delegate void TaskCompleteEventHandler<T>(T data);
+    public delegate void TaskFaultedEventHandler<T>(T data);
+    public delegate void ReadyToEnqueueEventHandler();
 }

@@ -1,16 +1,23 @@
-﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{C2ED9F68-3125-4192-978A-63FFDB5274E4}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument=".gitignore">
+﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="{9E0D825A-DCB9-4B14-84CA-F2BD4E2A45DB}|Default">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="QueueManagementSystem.Test/Program.cs" Line="1" Column="1" />
-      <File FileName="QueueManagementSystem.Demo/Program.cs" Line="8" Column="37" />
-      <File FileName="QueueManagementSystem.Demo/Models/BackupTaskInformationParameter.cs" Line="10" Column="1" />
-      <File FileName="QueueManagementSystem/QueueManagementSystem.csproj" Line="1" Column="1" />
-      <File FileName=".gitignore" Line="76" Column="6" />
+      <File FileName="QueueManagementSystem.Demo/Program.cs" Line="9" Column="1" />
+      <File FileName="QueueManagementSystem/QueueManagementSystem.csproj" />
+      <File FileName=".gitignore" />
+      <File FileName="QueueManagementSystem/Core/IQueueService.cs" />
+      <File FileName="QueueManagementSystem/Core/QueueService.cs" />
+      <File FileName="QueueManagementSystem.Demo/BackupTaskInformationParameter.cs" />
+      <File FileName="QueueManagementSystem/Events/TaskEvent.cs" />
+      <File FileName="QueueManagementSystem/Models/TaskInformation.cs" />
+      <File FileName="QueueManagementSystem/obj/QueueManagementSystem.csproj.nuget.g.targets" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="QueueManagementSystem" expanded="True" selected="True" />
+          <Node name="QueueManagementSystem" expanded="True">
+            <Node name="QueueManagementSystem.Demo" expanded="True" selected="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>

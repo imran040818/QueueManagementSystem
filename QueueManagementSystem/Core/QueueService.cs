@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QueueManagementSystem.Core
 {
-    public class QueueService<T1, T2> where T1 : TaskInformationParameter
+    public class QueueService<T1, T2> : IQueueService<T1, T2>
     {
         readonly ConcurrentDictionary<T2, TaskInformation<T1, T2>> queueDictionary;
         readonly ConcurrentDictionary<T2, ProgressTask<TaskInformation<T1, T2>>> progressQueueDictionary;
@@ -22,14 +22,16 @@ namespace QueueManagementSystem.Core
             progressQueueDictionary = new ConcurrentDictionary<T2, ProgressTask<TaskInformation<T1, T2>>>();
         }
 
-        public event TaskCancelledHandler<T1> TaskCancelledEventHandler;
-        public event TaskFaultedHandler<T1> TaskFaultedEventHandler;
-        public event TaskCompleteHandler<T1> TaskCompleteEventHandler;
-        public event TaskAllCancelledHandler<List<T1>> TaskAllCancelEventHandler;
-        public event ReadyToAcceptTaskHandler ReadyToAcceptTaskEventHandler;
-        public event TaskPausedHandler<T1> TaskPausedEventHandler;
-        public event TaskAllPausedHandler<List<T1>> TaskAllPausedEventHandler;
+        public event TaskCancelledEventHandler<T1> TaskCancelled;
+        public event TaskFaultedEventHandler<T1> TaskFaulted;
+        public event TaskCompleteEventHandler<T1> TaskComplete;
+        public event TaskAllCancelledEventHandler<List<T1>> TaskAllCancel;
+        public event ReadyToEnqueueEventHandler ReadyToEnqueue;
+        public event TaskPausedEventHandler<T1> TaskPausedEvent;
+        public event TaskAllPausedEventHandler<List<T1>> TaskAllPausedEvent;
         public QueueInformation QueueInformation { get; set; }
+
+        ///<inheritdoc/>
         public async Task Enqueue(TaskInformation<T1, T2> taskInformation)
         {
             await Task.Run(() =>
@@ -37,13 +39,19 @@ namespace QueueManagementSystem.Core
                 CancellationTokenSource itemCancellationTokenSource = new CancellationTokenSource();
                 CancellationTokenSource linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(globalCancellationTokenSource.Token, itemCancellationTokenSource.Token);
                 taskInformation.CancellationToken = linkedCancellationTokenSource;
+                if (queueDictionary.TryGetValue(taskInformation.TaskId, out TaskInformation<T1, T2> _))
+                {
+                    throw new ArgumentException($"{taskInformation.TaskId} key is already present");
+                }
                 if (!queueDictionary.TryGetValue(taskInformation.TaskId, out TaskInformation<T1, T2> _))
                 {
                     queueDictionary.TryAdd(taskInformation.TaskId, taskInformation);
                 }
             });
         }
-        public async Task Start()
+
+        ///<inheritdoc/>
+        public async Task StartQueue()
         {
             // Start the task checker. it will check wheather the task is complete or not.
             startQueue = true;
@@ -84,19 +92,20 @@ namespace QueueManagementSystem.Core
                             task.Start();
                         }
                     }
-                }
-                if (progressQueueDictionary.Count < QueueInformation.PreferedParallelizationFactor)
-                {
-                    ReadyToAcceptTaskEventHandler?.Invoke();
+                    ReadyToEnqueue?.Invoke();
                 }
                 await Task.Delay(1000);
             }
         }
-        public async Task Stop()
+
+        ///<inheritdoc/>
+        public async Task StopQueue()
         {
             startQueue = false;
             await Cancel();
         }
+
+        ///<inheritdoc/>
         public async Task Cancel(T2 taskId)
         {
             await Task.Run(() =>
@@ -108,7 +117,7 @@ namespace QueueManagementSystem.Core
                         value.CancellationToken?.Cancel();
                         value.CancellationToken?.Dispose();
                         queueDictionary.TryRemove(taskId, out TaskInformation<T1, T2> _);
-                        TaskCancelledEventHandler?.Invoke(value.Parameter);
+                        TaskCancelled?.Invoke(value.Parameter);
                     }
                     if (progressQueueDictionary.TryGetValue(taskId, out ProgressTask<TaskInformation<T1, T2>> progressValue)
                     && !progressValue.TaskInformation.CancellationToken.IsCancellationRequested)
@@ -118,6 +127,8 @@ namespace QueueManagementSystem.Core
                 }
             });
         }
+
+        ///<inheritdoc/>
         public async Task Cancel()
         {
             await Task.Run(() =>
@@ -137,11 +148,29 @@ namespace QueueManagementSystem.Core
                         parameters.AddRange(queueTaskParameter);
 
                     globalCancellationTokenSource?.Cancel();
-                    TaskAllCancelEventHandler?.Invoke(parameters);
+                    TaskAllCancel?.Invoke(parameters);
                     queueDictionary.Clear();
                 }
             });
         }
+
+        ///<inheritdoc/>
+        public async Task CancelLastRunningOperation()
+        {
+            await Task.Run(() =>
+            {
+                lock (asyncLock)
+                {
+                    T2 key = progressQueueDictionary.Keys.Last();
+                    if (key != null && progressQueueDictionary.TryGetValue(key, out ProgressTask<TaskInformation<T1, T2>> progressValue))
+                    {
+                        progressValue.TaskInformation.CancellationToken?.Cancel();
+                    }
+                }
+            });
+        }
+
+        ///<inheritdoc/>
         public async Task Pause(T2 taskId)
         {
             await Task.Run(() =>
@@ -153,7 +182,7 @@ namespace QueueManagementSystem.Core
                         value.CancellationToken?.Cancel();
                         value.CancellationToken?.Dispose();
                         queueDictionary.TryRemove(taskId, out TaskInformation<T1, T2> _);
-                        TaskPausedEventHandler?.Invoke(value.Parameter);
+                        TaskPausedEvent?.Invoke(value.Parameter);
                     }
                     if (progressQueueDictionary.TryGetValue(taskId, out ProgressTask<TaskInformation<T1, T2>> progressValue)
                     && !progressValue.TaskInformation.CancellationToken.IsCancellationRequested)
@@ -164,6 +193,8 @@ namespace QueueManagementSystem.Core
                 }
             });
         }
+
+        ///<inheritdoc/>
         public async Task Pause()
         {
             await Task.Run(() =>
@@ -184,11 +215,36 @@ namespace QueueManagementSystem.Core
                     progressQueueDictionary.Select(s => s.Value.TaskInformation)
                    .ToList().ForEach(f => f.IsPaused = true);
                     globalCancellationTokenSource?.Cancel();
-                    TaskAllPausedEventHandler?.Invoke(parameters);
+                    TaskAllPausedEvent?.Invoke(parameters);
                     queueDictionary.Clear();
                 }
             });
         }
+
+        ///<inheritdoc/>
+        public void PauseQueue()
+        {
+            startQueue = false;
+        }
+
+        ///<inheritdoc/>
+        public async Task PauseLastRunningOperation()
+        {
+            await Task.Run(() =>
+            {
+                lock (asyncLock)
+                {
+                    T2 key = progressQueueDictionary.Keys.Last();
+                    if (key != null && progressQueueDictionary.TryGetValue(key, out ProgressTask<TaskInformation<T1, T2>> progressValue))
+                    {
+                        progressValue.TaskInformation.IsPaused = true;
+                        progressValue.TaskInformation.CancellationToken?.Cancel();
+                    }
+                }
+            });
+        }
+
+        ///<inheritdoc/>
         public void Configure(QueueInformation queueInformation)
         {
             if (progressQueueDictionary.Count > 0 || queueDictionary.Count > 0)
@@ -206,6 +262,7 @@ namespace QueueManagementSystem.Core
             }
             globalCancellationTokenSource = new CancellationTokenSource();
         }
+
         private async Task<TaskInformation<T1, T2>> Dequeue()
         {
             TaskInformation<T1, T2> data = default;
@@ -218,8 +275,8 @@ namespace QueueManagementSystem.Core
                 }
             });
             return data;
-
         }
+
         private void ExecuteExceptionFlow(TaskInformation<T1, T2> dequeueItem, Exception exception)
         {
             if (exception.InnerException is OperationCanceledException operationCanceledException &&
@@ -229,20 +286,21 @@ namespace QueueManagementSystem.Core
                 {
                     if (dequeueItem.IsPaused)
                     {
-                        TaskPausedEventHandler?.Invoke(dequeueItem.Parameter);
+                        TaskPausedEvent?.Invoke(dequeueItem.Parameter);
                     }
                     else
                     {
                         progressQueueDictionary[dequeueItem.TaskId].TaskInformation.CancellationToken?.Dispose();
-                        TaskCancelledEventHandler?.Invoke(dequeueItem.Parameter);
+                        TaskCancelled?.Invoke(dequeueItem.Parameter);
                     }
                 }
             }
             else
             {
-                TaskFaultedEventHandler?.Invoke(dequeueItem.Parameter);
+                TaskFaulted?.Invoke(dequeueItem.Parameter);
             }
         }
+
         private void ExecuteNormalTaskCompleteFlow(TaskInformation<T1, T2> dequeueItem)
         {
             if (!globalCancellationTokenSource.IsCancellationRequested)
@@ -253,12 +311,12 @@ namespace QueueManagementSystem.Core
                     {
                         if (dequeueItem.IsPaused)
                         {
-                            TaskPausedEventHandler?.Invoke(dequeueItem.Parameter);
+                            TaskPausedEvent?.Invoke(dequeueItem.Parameter);
                         }
                         else
                         {
                             progressQueueDictionary[dequeueItem.TaskId].TaskInformation.CancellationToken?.Dispose();
-                            TaskCancelledEventHandler?.Invoke(dequeueItem.Parameter);
+                            TaskCancelled?.Invoke(dequeueItem.Parameter);
                         }
                     }
                 }
@@ -267,7 +325,7 @@ namespace QueueManagementSystem.Core
                     if (progressQueueDictionary.TryGetValue(dequeueItem.TaskId, out ProgressTask<TaskInformation<T1, T2>> data))
                     {
                         progressQueueDictionary[dequeueItem.TaskId].TaskInformation.CancellationToken?.Dispose();
-                        TaskCompleteEventHandler?.Invoke(data.TaskInformation.Parameter);
+                        TaskComplete?.Invoke(data.TaskInformation.Parameter);
                     }
                 }
             }

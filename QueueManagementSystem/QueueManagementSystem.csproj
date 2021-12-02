@@ -1,8 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<Authors>Imran Shaik</Authors>
+		<Product>Queue System</Product>
+		<Description>
+			Queue system is used to manage queue's efficiently. It contains events, which can be used based on user need. It is generic so same queue can be used for multipurpose task
+		</Description>
+		<PackageProjectUrl></PackageProjectUrl>
+		<RepositoryUrl></RepositoryUrl>
+		<PackageTags>Queue QueueManagement ThreadSafe</PackageTags>
+		<PackageReleaseNotes>1.0.0</PackageReleaseNotes>
+		<Version>1.0.1</Version>
+		<OutputType>Library</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<ApplicationIcon />
+		<StartupObject />
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+	</ItemGroup>
 </Project>

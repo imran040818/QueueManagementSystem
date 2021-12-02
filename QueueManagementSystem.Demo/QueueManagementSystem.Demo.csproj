@@ -11,7 +11,4 @@
   <ItemGroup>
     <None Remove="Test\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
 </Project>
