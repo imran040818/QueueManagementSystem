@@ -6,9 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QueueManagementSystem\QueueManagementSystem.csproj" />
+    <None Remove="Test\" />
+    <None Remove="QueueManagementSystem" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Test\" />
+    <ProjectReference Include="..\QueueManagementSystem\QueueManagementSystem.csproj" />
   </ItemGroup>
 </Project>

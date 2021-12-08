@@ -15,3 +15,4 @@ C:/Users/Imran.Shaik/source/repos/QueueManagementSystem/QueueManagementSystem/ob
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.csproj.CoreCompileInputs.cache
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.dll
 /Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.pdb
+/Users/imran/Documents/Project-2021/QueueManagementSystem/QueueManagementSystem/obj/Debug/netcoreapp3.1/QueueManagementSystem.csproj.AssemblyReference.cache

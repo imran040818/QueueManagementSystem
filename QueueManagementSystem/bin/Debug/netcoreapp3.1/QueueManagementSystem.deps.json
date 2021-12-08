@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "QueueManagementSystem/1.0.1": {
+      "QueueManagementSystem/1.0.2": {
         "runtime": {
           "QueueManagementSystem.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "QueueManagementSystem/1.0.1": {
+    "QueueManagementSystem/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

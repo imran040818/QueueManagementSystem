@@ -2,21 +2,33 @@
   <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="QueueManagementSystem.Test/Program.cs" Line="1" Column="1" />
-      <File FileName="QueueManagementSystem.Demo/Program.cs" Line="9" Column="1" />
+      <File FileName="QueueManagementSystem.Demo/Program.cs" Line="61" Column="13" />
       <File FileName="QueueManagementSystem/QueueManagementSystem.csproj" />
       <File FileName=".gitignore" />
-      <File FileName="QueueManagementSystem/Core/IQueueService.cs" />
-      <File FileName="QueueManagementSystem/Core/QueueService.cs" />
+      <File FileName="QueueManagementSystem/Core/IQueueService.cs" Line="1" Column="1" />
+      <File FileName="QueueManagementSystem/Core/QueueService.cs" Line="77" Column="68" />
       <File FileName="QueueManagementSystem.Demo/BackupTaskInformationParameter.cs" />
-      <File FileName="QueueManagementSystem/Events/TaskEvent.cs" />
-      <File FileName="QueueManagementSystem/Models/TaskInformation.cs" />
-      <File FileName="QueueManagementSystem/obj/QueueManagementSystem.csproj.nuget.g.targets" Line="1" Column="1" />
+      <File FileName="QueueManagementSystem/Events/TaskEvent.cs" Line="6" Column="96" />
+      <File FileName="QueueManagementSystem/obj/QueueManagementSystem.csproj.nuget.g.targets" />
+      <File FileName="QueueManagementSystem/Events/EventArgs/QueueEventArg.cs" Line="8" Column="13" />
+      <File FileName="QueueManagementSystem/Models/QueueInformation.cs" Line="14" Column="2" />
+      <File FileName="QueueManagementSystem/Models/TaskInformation.cs" Line="7" Column="41" />
+      <File FileName="QueueManagementSystem/Models/QueueTaskInformation.cs" Line="15" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="QueueManagementSystem" expanded="True">
-            <Node name="QueueManagementSystem.Demo" expanded="True" selected="True" />
+            <Node name="QueueManagementSystem" expanded="True" selected="True">
+              <Node name="Core" expanded="True" />
+              <Node name="Events" expanded="True">
+                <Node name="EventArg" expanded="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+            <Node name="QueueManagementSystem.Demo" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -24,8 +36,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.QueueManagementSystem.Test PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.QueueManagementSystem PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

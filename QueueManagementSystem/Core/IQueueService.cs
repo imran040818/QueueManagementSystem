@@ -117,5 +117,7 @@ namespace QueueManagementSystem.Core
         /// </summary>
         /// <returns><see cref="Task"/></returns>
         void PauseQueue();
+        Task<TaskInformation<T1, T2>> Dequeue();
+        Task SetParallelizationFactor(int parallelizationFactor);
     }
 }

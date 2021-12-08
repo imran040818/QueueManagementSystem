@@ -9,5 +9,6 @@ namespace QueueManagementSystem.Models
     {
         public int MaxParallelizationFactor { get; } = Environment.ProcessorCount * 4;
         public int PreferedParallelizationFactor { get; set; }
+        public int QueueTimer { get; set; } = 3000;
     }
 }
