@@ -10,8 +10,8 @@
 		<PackageProjectUrl></PackageProjectUrl>
 		<RepositoryUrl>https://github.com/imran040818/QueueManagementSystem.git</RepositoryUrl>
 		<PackageTags>Queue QueueManagement ThreadSafe</PackageTags>
-		<PackageReleaseNotes>1.0.3</PackageReleaseNotes>
-		<Version>1.0.3</Version>
+		<PackageReleaseNotes>1.0.4</PackageReleaseNotes>
+		<Version>1.0.4</Version>
 		<OutputType>Library</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<ApplicationIcon />

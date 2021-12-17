@@ -66,7 +66,7 @@ namespace QueueManagementSystem.Core
         /// Cancel the last running operation (Operation which has ran for very short interval as compared to other operation)
         /// </summary>
         /// <returns><see cref="Task"/></returns>
-        Task CancelLastRunningOperation();
+        Task<T1> CancelLastRunningOperation();
 
         /// <summary>
         /// Configure the queue operation.
@@ -98,7 +98,7 @@ namespace QueueManagementSystem.Core
         /// Cancel the last running operation (Operation which has ran for very short interval as compared to other operation)
         /// </summary>
         /// <returns><see cref="Task"/></returns>
-        Task PauseLastRunningOperation();
+        Task<T1> PauseLastRunningOperation();
 
         /// <summary>
         /// Start the queue service

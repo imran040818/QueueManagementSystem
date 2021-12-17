@@ -58,7 +58,7 @@ namespace QueueManagementSystem.Core
             startQueue = true;
             while (startQueue)
             {
-                if (progressQueueDictionary.Count < QueueInformation.PreferedParallelizationFactor && queueDictionary.Count==0)
+                if (progressQueueDictionary.Count < QueueInformation.PreferedParallelizationFactor)
                 {
                     lock (asyncLock)
                     {
@@ -93,7 +93,10 @@ namespace QueueManagementSystem.Core
                             task.Start();
                         }
                     }
-                    ReadyToEnqueue?.Invoke(this,null);
+                    if(queueDictionary.IsEmpty && progressQueueDictionary.Count < QueueInformation.PreferedParallelizationFactor)
+                    {
+                        ReadyToEnqueue?.Invoke(this, null);
+                    }
                 }
                 await Task.Delay(QueueInformation.QueueTimer);
             }
@@ -159,8 +162,9 @@ namespace QueueManagementSystem.Core
         }
 
         ///<inheritdoc/>
-        public async Task CancelLastRunningOperation()
+        public async Task<T1> CancelLastRunningOperation()
         {
+            T1 data = default;
             await Task.Run(() =>
             {
                 lock (asyncLock)
@@ -169,9 +173,11 @@ namespace QueueManagementSystem.Core
                     if (key != null && progressQueueDictionary.TryGetValue(key, out ProgressTask<QueueTaskInformation<T1, T2>> progressValue))
                     {
                         progressValue.TaskInformation.CancellationToken?.Cancel();
+                        data = progressValue.TaskInformation.TaskInformation.Parameter;
                     }
                 }
             });
+            return data;
         }
 
         ///<inheritdoc/>
@@ -235,8 +241,9 @@ namespace QueueManagementSystem.Core
         }
 
         ///<inheritdoc/>
-        public async Task PauseLastRunningOperation()
+        public async Task<T1> PauseLastRunningOperation()
         {
+            T1 data = default;
             await Task.Run(() =>
             {
                 lock (asyncLock)
@@ -246,9 +253,11 @@ namespace QueueManagementSystem.Core
                     {
                         progressValue.TaskInformation.IsPaused = true;
                         progressValue.TaskInformation.CancellationToken?.Cancel();
+                        data = progressValue.TaskInformation.TaskInformation.Parameter;
                     }
                 }
             });
+            return data;
         }
 
         ///<inheritdoc/>
